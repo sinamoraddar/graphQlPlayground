@@ -8,15 +8,22 @@ const schema = require("./schema/schema");
 const app = express();
 
 // Replace with your mongoLab URI
-const MONGO_URI = "mongodb://stephen:stephen@ds021182.mlab.com:21182/lyricaldb";
+const mongoPassword = "bsCt9ujXfUV3aPps";
+const mongoUserName = "sinamoraddar";
+const MONGO_URI = `mongodb+srv://${mongoUserName}:${mongoPassword}@cluster0.syfzc.mongodb.net/<dbname>?retryWrites=true&w=majority`;
+
 if (!MONGO_URI) {
   throw new Error("You must provide a MongoLab URI");
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(MONGO_URI, { useNewUrlParser: true });
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 mongoose.connection
-  .once("open", () => console.log("Connected to MongoLab instance."))
+  .once("openUri", () => console.log("Connected to MongoLab instance."))
   .on("error", (error) => console.log("Error connecting to MongoLab:", error));
 
 app.use(bodyParser.json());
