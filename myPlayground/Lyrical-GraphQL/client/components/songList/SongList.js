@@ -2,16 +2,25 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
-const SongList = ({ data: { songs: songList } }) => {
+const SongList = ({ data: { songs: songList, loading } }) => {
+  const renderSongs = () => {
+    return songList.map(({ title, id }) => (
+      <li className="collection-item" key={id}>
+        {title}
+      </li>
+    ));
+  };
   return (
     <div>
-      Song List
-      {songList && songList !== null && songList.length > 0 && (
-        <ul>
-          {songList.map(({ title, id }) => (
-            <li key={id}>{title}</li>
-          ))}
-        </ul>
+      {loading ? (
+        "Loading..."
+      ) : songList !== null && songList.length > 0 ? (
+        <div>
+          Song List
+          <ul className="collection">{renderSongs()}</ul>
+        </div>
+      ) : (
+        "nothing available to show"
       )}
     </div>
   );
