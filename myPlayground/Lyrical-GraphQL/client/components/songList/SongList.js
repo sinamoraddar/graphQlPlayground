@@ -6,13 +6,14 @@ import query from "../../queries/fetchSongs";
 import deleteSongMutation from "../../queries/deleteSong";
 import fetchSongsQuery from "../../queries/fetchSongs";
 
-const SongList = ({ data: { songs: songList, loading }, mutate }) => {
+const SongList = ({ data: { songs: songList, loading, refetch }, mutate }) => {
   const onDelete = ({ title, id }) => {
     mutate({
       variables: { songId: id },
-      refetchQueries: [{ query: fetchSongsQuery }],
+      // refetchQueries: [{ query: fetchSongsQuery }],
     })
       .then(() => {
+        refetch();
         // alert(`${title} was deleted ,id: ${id}`);
       })
       .catch((error) => {
