@@ -1,14 +1,16 @@
 import React from "react";
 import { graphql } from "react-apollo";
-// import getSongDetail from "../../queries/getSongDetail";
+import getSongDetail from "../../queries/getSongDetail";
 
-const SongDetail = (props) => {
-  console.log(props);
+const SongDetail = ({ data }) => {
+  const { song, loading } = data;
   return (
     <div>
-      <h3>Song Detail {5} </h3>
+      <h3>{loading ? "Loading..." : song.title || "404 not found"}</h3>
     </div>
   );
 };
 
-export default SongDetail;
+export default graphql(getSongDetail, {
+  options: (props) => ({ variables: { id: props.params.id } }),
+})(SongDetail);

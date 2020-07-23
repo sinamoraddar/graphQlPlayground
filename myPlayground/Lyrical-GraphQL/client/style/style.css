@@ -1,6 +1,7 @@
 .collection-item {
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
 .material-icons {
   cursor: pointer;
