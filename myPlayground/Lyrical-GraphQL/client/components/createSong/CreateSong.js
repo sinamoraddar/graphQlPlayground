@@ -4,6 +4,7 @@ import { graphql } from "react-apollo";
 import { hashHistory } from "react-router";
 import { Link } from "react-router";
 import query from "../../queries/fetchSongs";
+import BackButton from "../backButton/BackButton";
 
 class CreateSong extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class CreateSong extends Component {
   render() {
     return (
       <div>
-        <Link to="/">Back</Link>
+        <BackButton />
         <h3>Create a new song</h3>
         <form onSubmit={this.onSubmit}>
           <label>

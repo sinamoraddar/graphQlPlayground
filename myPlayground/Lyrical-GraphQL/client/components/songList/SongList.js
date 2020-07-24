@@ -4,7 +4,6 @@ import { graphql } from "react-apollo";
 import { Link, hashHistory } from "react-router";
 import query from "../../queries/fetchSongs";
 import deleteSongMutation from "../../queries/deleteSong";
-import fetchSongsQuery from "../../queries/fetchSongs";
 
 const SongList = ({ data: { songs: songList, loading, refetch }, mutate }) => {
   const onDelete = ({ title, id }) => {
@@ -21,17 +20,10 @@ const SongList = ({ data: { songs: songList, loading, refetch }, mutate }) => {
         console.log(error);
       });
   };
-  const onSongClick = ({ id }) => {
-    hashHistory.push(`songs/${id}`);
-  };
   const renderSongs = () => {
     return songList.map(({ title, id }) => (
-      <li
-        className="collection-item"
-        onClick={onSongClick.bind(null, { id })}
-        key={id}
-      >
-        {title}
+      <li className="collection-item" key={id}>
+        <Link to={`/songs/${id}`}>{title}</Link>
         <i
           className="material-icons"
           onClick={onDelete.bind(null, { title, id })}
