@@ -3,8 +3,9 @@ import { graphql } from "react-apollo";
 import getSongDetail from "../../queries/getSongDetail";
 import BackButton from "../backButton/BackButton";
 import LyricCreate from "../lyricCreate/LyricCreate";
+import LyricList from "../lyricList/LyricList";
 
-const SongDetail = ({ data }) => {
+const SongDetail = ({ data, params: { id } }) => {
   const { song, loading } = data;
   console.log(song);
   return (
@@ -16,11 +17,8 @@ const SongDetail = ({ data }) => {
         ) : (
           <div>
             {song.title}
-            {song.lyrics.length > 0 &&
-              song.lyrics.map(({ content }, index) => (
-                <p key={index}>{content}</p>
-              ))}
-            <LyricCreate songId={song.id} />
+            {song.lyrics.length > 0 && <LyricList lyrics={song.lyrics} />}
+            <LyricCreate songId={id} />
           </div>
         )}
       </h3>

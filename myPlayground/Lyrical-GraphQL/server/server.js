@@ -8,7 +8,7 @@ const schema = require("./schema/schema");
 const app = express();
 
 // Replace with your mongoLab URI
-const mongoPassword = "bsCt9ujXfUV3aPps";
+const mongoPassword = "wB0lxI86vLkMSVl3";
 const mongoUserName = "sinamoraddar";
 const MONGO_URI = `mongodb+srv://${mongoUserName}:${mongoPassword}@cluster0.syfzc.mongodb.net/<dbname>?retryWrites=true&w=majority`;
 
