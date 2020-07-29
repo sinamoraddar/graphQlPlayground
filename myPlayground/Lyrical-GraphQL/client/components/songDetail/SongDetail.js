@@ -7,7 +7,6 @@ import LyricList from "../lyricList/LyricList";
 
 const SongDetail = ({ data, params: { id } }) => {
   const { song, loading } = data;
-  console.log(song);
   return (
     <div>
       <BackButton />

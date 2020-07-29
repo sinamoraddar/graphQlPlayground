@@ -17,7 +17,9 @@ class LyricCreate extends React.Component {
     const { mutate, songId } = this.props;
 
     const { content } = this.state;
-    mutate({ variables: { content, songId } })
+    mutate({
+      variables: { content, songId },
+    })
       .then(() => {
         this.setState({ content: "" });
       })
@@ -27,7 +29,6 @@ class LyricCreate extends React.Component {
       });
   }
   render() {
-    console.log(this.props);
     return (
       <form onSubmit={this.onSubmit}>
         <label>

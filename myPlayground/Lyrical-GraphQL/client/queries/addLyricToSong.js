@@ -5,6 +5,7 @@ export default gql`
       title
       id
       lyrics {
+        id
         content
       }
     }
