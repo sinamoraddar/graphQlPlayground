@@ -10,17 +10,15 @@ const SongDetail = ({ data, params: { id } }) => {
   return (
     <div>
       <BackButton />
-      <h3>
-        {loading ? (
-          "Loading..."
-        ) : (
-          <div>
-            {song.title}
-            {song.lyrics.length > 0 && <LyricList lyrics={song.lyrics} />}
-            <LyricCreate songId={id} />
-          </div>
-        )}
-      </h3>
+      {loading ? (
+        <h3>Loading...</h3>
+      ) : (
+        <div>
+          <h3>{song.title}</h3>
+          {song.lyrics.length > 0 && <LyricList lyrics={song.lyrics} />}
+          <LyricCreate songId={id} />
+        </div>
+      )}
     </div>
   );
 };
