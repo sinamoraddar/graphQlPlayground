@@ -1,10 +1,13 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLID } = graphql;
+const UserType = require("./user_type");
+const { GraphQLObjectType } = graphql;
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    dummyType: { type: GraphQLID },
+    user: {
+      type: UserType,
+    },
   },
 });
 
