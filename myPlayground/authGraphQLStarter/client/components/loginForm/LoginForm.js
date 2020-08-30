@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
+import { hashHistory } from "react-router";
 //components
 import AuthForm from "../authForm/AuthForm";
 //mutations
@@ -19,6 +20,12 @@ class LoginForm extends Component {
         this.setState(() => ({ errors }));
       });
   };
+  componentWillUpdate(nextProps) {
+    console.log(this.props, nextProps);
+    if (!this.props.data.user && nextProps.data.user) {
+      hashHistory.push("/dashboard");
+    }
+  }
   render() {
     return (
       <div>
@@ -32,4 +39,4 @@ class LoginForm extends Component {
   }
 }
 
-export default graphql(LoginForm);
+export default graphql(CurrentUserQuery)(graphql(LoginMutation)(LoginForm));

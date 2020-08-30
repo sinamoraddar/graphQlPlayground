@@ -4,11 +4,21 @@ import { graphql } from "react-apollo";
 import AuthForm from "../authForm/AuthForm";
 //mutations
 import SignUpMutation from "../../mutations/SignUp";
+//queries
+import CurrentUserQuery from "../../queries/CurrentUser";
 
 class SignUpForm extends Component {
   state = { errors: [] };
   onSubmit = ({ email, password }) => {
-    this.props.mutate({ variables: { email, password } });
+    this.props
+      .mutate({
+        variables: { email, password },
+        refetchQueries: [{ query: CurrentUserQuery }],
+      })
+      .catch((res) => {
+        const errors = res.graphQLErrors.map(({ message }) => message);
+        this.setState(() => ({ errors }));
+      });
   };
   render() {
     return (
